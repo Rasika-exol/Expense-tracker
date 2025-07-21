@@ -1,0 +1,68 @@
+body {
+  background-color: #f8f9fa;
+  font-family: Arial, sans-serif;
+  padding: 2rem;
+}
+
+#expenseForm {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: flex-end;
+  margin-bottom: 2rem;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  min-width: 200px;
+}
+
+input,
+select {
+  padding: 0.5rem;
+  font-size: 1rem;
+}
+
+#submitBtn {
+  padding: 0.5rem 1rem;
+  background-color: rgb(41, 100, 187);
+  color: white;
+  border: none;
+  font-size: 1rem;
+  cursor: pointer;
+}
+
+#expenseList {
+  list-style: none;
+  padding-left: 0;
+}
+
+#expenseList li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #ffffff;
+  padding: 0.75rem 1rem;
+  margin-bottom: 0.5rem;
+  border: 1px solid #dee2e6;
+  border-radius: 0.375rem;
+}
+
+#expenseList button {
+  margin-left: 0.5rem;
+  padding: 0.25rem 0.5rem;
+  border: none;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+#expenseList .btn-danger {
+  background-color: #dc3545;
+  color: white;
+}
+
+#expenseList .btn-secondary {
+  background-color: #6c757d;
+  color: white;
+}
