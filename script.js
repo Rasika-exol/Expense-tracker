@@ -25,7 +25,16 @@ function handleFormSubmit(event) {
   };
 
   const expenseList = JSON.parse(localStorage.getItem("expenseList")) || [];
-  addData(expenseList, expense);
+  const editId = sessionStorage.getItem("editId");
+
+  if (editId) {
+    expense.id = Number(editId);
+    update(expenseList, editId, expense);
+    sessionStorage.removeItem("editId");
+  } else {
+    addData(expenseList, expense);
+  }
+
   localStorage.setItem("expenseList", JSON.stringify(expenseList));
   event.target.reset();
   const submitBtn = document.querySelector("button[type=submit]");
@@ -47,6 +56,10 @@ function display(data) {
   `;
   const deleteBtn = li.querySelector(".btn-danger");
   deleteBtn.addEventListener("click", () => deleteData(data.id, li));
+
+  const editBtn = li.querySelector(".btn-secondary");
+  editBtn.addEventListener("click", () => editData(data));
+
   ul.appendChild(li);
 }
 
@@ -62,4 +75,28 @@ function deleteData(id, li) {
 
   localStorage.setItem("expenseList", JSON.stringify(updatedList));
   li.remove();
+}
+
+function editData(data) {
+  document.getElementById("amount").value = data.amount;
+  document.getElementById("description").value = data.description;
+  document.getElementById("category").value = data.category;
+
+  sessionStorage.setItem("editId", data.id);
+
+  const submitBtn = document.querySelector("button[type=submit]");
+  submitBtn.textContent = "Update Expense";
+}
+
+function update(expenseList, editId, updatedData) {
+  for (let i = 0; i < expenseList.length; i++) {
+    if (expenseList[i].id == editId) {
+      expenseList[i] = updatedData;
+    }
+  }
+
+  const li = document.getElementById(editId);
+  li.querySelector(
+    "span"
+  ).textContent = `${updatedData.amount} - ${updatedData.category} - ${updatedData.description}`;
 }
