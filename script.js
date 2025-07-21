@@ -7,8 +7,6 @@ function initialize() {
     display(expenseList[i]);
   }
 
-  sessionStorage.removeItem("editId");
-
   const form = document.querySelector("#expenseForm");
   form.addEventListener("submit", handleFormSubmit);
 }
@@ -42,6 +40,10 @@ function display(data) {
 
   li.innerHTML = `
     <span>${data.amount} - ${data.category} - ${data.description}</span>
+    <div>
+      <button class="btn btn-sm btn-danger me-2">Delete</button>
+      <button class="btn btn-sm btn-secondary">Edit</button>
+    </div>
   `;
   ul.appendChild(li);
 }
