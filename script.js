@@ -45,6 +45,8 @@ function display(data) {
       <button class="btn btn-sm btn-secondary">Edit</button>
     </div>
   `;
+  const deleteBtn = li.querySelector(".btn-danger");
+  deleteBtn.addEventListener("click", () => deleteData(data.id, li));
   ul.appendChild(li);
 }
 
@@ -52,4 +54,12 @@ function addData(expenseList, expense) {
   expense.id = Date.now();
   expenseList.push(expense);
   display(expense);
+}
+
+function deleteData(id, li) {
+  const expenseList = JSON.parse(localStorage.getItem("expenseList")) || [];
+  const updatedList = expenseList.filter((item) => item.id != id);
+
+  localStorage.setItem("expenseList", JSON.stringify(updatedList));
+  li.remove();
 }
